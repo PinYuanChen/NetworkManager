@@ -8,7 +8,15 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        NetworkManager.request(endpoint: FlickrEndpoint.getSearchResults(searchText: "Cat", page: 1)) {
+            (result: Result<FlickrResponse, Error> ) in
+            switch result {
+                case.success(let response):
+                    print("Response: ", response)
+                case.failure(let error):
+                    print(error)
+            }
+        }
     }
 
 
