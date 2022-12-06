@@ -33,7 +33,7 @@ class NetworkManager {
                 return
             }
             
-            guard response != nil,
+            guard let response = response as? HTTPURLResponse,
                   let data = data else {
                 return
             }
@@ -44,7 +44,7 @@ class NetworkManager {
                     completion(.success(responseObject))
                 } else {
                     let error = NSError(domain: "",
-                                        code: 200,
+                                        code: response.statusCode,
                                         userInfo: [NSLocalizedDescriptionKey: "Failed to decode response"])
                     completion(.failure(error))
                 }
