@@ -7,8 +7,8 @@
 
 import Foundation
 
-class NetworkAsyncAwaitManager {
-    class func request<T: Codable>(
+actor NetworkAsyncAwaitManager {
+    static func request<T: Codable>(
         endpoint: Endpoint,
         responseModel: T.Type
     ) async throws -> T  {
@@ -28,6 +28,7 @@ class NetworkAsyncAwaitManager {
         
         do {
             let (data, response) = try await URLSession.shared.data(for: urlRequest, delegate: nil)
+            
             guard let response = response as? HTTPURLResponse else {
                 throw RequestError.noResponse
             }
