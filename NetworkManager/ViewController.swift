@@ -26,7 +26,10 @@ class ViewController: UIViewController {
 
     func searchForDogs() {
         Task { @MainActor in
-            let _ = try await NetworkAsyncAwaitManager.request(endpoint: FlickrEndpoint.getSearchResults(searchText: "dog", page: 1), responseModel: FlickrResponse.self)
+            let _ = try await NetworkAsyncAwaitManager.request(
+                endpoint: FlickrEndpoint.getSearchResults(searchText: "dog", page: 1),
+                responseModel: FlickrResponse.self
+            )
         }
     }
 }
